@@ -5,8 +5,7 @@ const resend = new Resend(process.env.RESEND_API_KEY);
 
 exports.handler = async function(event) {
   try {
-    const body = JSON.parse(event.body || '{}');
-    const { email, name } = body;
+    const { email, name } = JSON.parse(event.body || '{}');
 
     if (!email) {
       return { statusCode: 400, body: JSON.stringify({ success: false, error: "Email required" }) };
@@ -14,28 +13,23 @@ exports.handler = async function(event) {
 
     const code = Math.floor(100000 + Math.random() * 900000).toString();
 
-    console.log(`Attempting to send code ${code} to ${email}`);
-
     const result = await resend.emails.send({
-      from: 'MegaCarga Coop <onboarding@resend.dev>',   // Using safe default for testing
+      from: 'MegaCarga Coop <onboarding@resend.dev>',   // ← Safe default
       to: email,
       subject: 'Tu código de verificación - MegaCarga Coop',
       html: `
         <h2>Hola ${name || 'Cooperativista'},</h2>
         <p>Tu código de verificación es: <strong>${code}</strong></p>
         <p>Este código expira en 15 minutos.</p>
+        <p>Gracias por unirte a MegaCarga Coop.</p>
       `
     });
 
-    console.log("Email sent successfully:", result);
+    console.log("Email sent successfully to:", email);
 
-    return { 
-      statusCode: 200, 
-      body: JSON.stringify({ success: true }) 
-    };
-
+    return { statusCode: 200, body: JSON.stringify({ success: true }) };
   } catch (error) {
-    console.error("Full error:", error);
+    console.error("Send error:", error);
     return { 
       statusCode: 500, 
       body: JSON.stringify({ success: false, error: error.message }) 
