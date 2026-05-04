@@ -264,5 +264,102 @@
       alert("✅ Nuevo código enviado");
     }
   </script>
+  <script>
+// ====================== VERIFICATION SYSTEM (Fixed) ======================
+let currentTempToken = null;
+let currentEmail = null;
+
+async function sendVerificationCode() {
+  const nameField = document.querySelector('input[placeholder="Nombre completo"]') || document.getElementById('name');
+  const emailField = document.querySelector('input[placeholder="Correo electrónico"]') || document.getElementById('email');
+  
+  const name = nameField ? nameField.value.trim() : '';
+  const email = emailField ? emailField.value.trim() : '';
+
+  if (!email || !name) {
+    alert("Por favor ingresa tu nombre y correo electrónico");
+    return;
+  }
+
+  currentEmail = email;
+
+  try {
+    const response = await fetch('/.netlify/functions/send-code', {
+      method: 'POST',
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ name, email })
+    });
+
+    const data = await response.json();
+
+    if (data.success) {
+      currentTempToken = data.tempToken;
+      alert(`✅ Código enviado a ${email}\n\nAhora ingresa el código que recibiste.`);
+      
+      // Optional: You can hide the form and show a verification modal if you want
+    } else {
+      alert("Error al enviar: " + (data.error || "Inténtalo de nuevo"));
+    }
+  } catch (err) {
+    console.error(err);
+    alert("Error de conexión. Inténtalo de nuevo.");
+  }
+}
+
+async function verifyCode() {
+  const codeField = document.querySelector('input[placeholder="Código de 6 dígitos"]') || document.getElementById('code-input');
+  const code = codeField ? codeField.value.trim() : '';
+
+  if (code.length !== 6) {
+    alert("Ingresa el código de 6 dígitos");
+    return;
+  }
+
+  if (!currentTempToken) {
+    alert("Primero confirma tu aporte para recibir un código");
+    return;
+  }
+
+  try {
+    const response = await fetch('/.netlify/functions/verify-code', {
+      method: 'POST',
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        email: currentEmail,
+        code: code,
+        tempToken: currentTempToken
+      })
+    });
+
+    const result = await response.json();
+
+    if (result.success) {
+      alert("✅ ¡Correo verificado correctamente! 🎉");
+      // You can redirect or show success message here
+    } else {
+      alert("❌ " + (result.error || "Código inválido o expirado"));
+      if (codeField) codeField.value = '';
+    }
+  } catch (err) {
+    console.error(err);
+    alert("Error interno. Inténtalo de nuevo.");
+  }
+}
+
+// Attach to buttons (works with your current HTML)
+document.addEventListener('DOMContentLoaded', () => {
+  const confirmBtn = document.querySelector('button:contains("Confirmar mi aporte")') || 
+                     Array.from(document.querySelectorAll('button')).find(b => b.textContent.includes('Confirmar'));
+  
+  if (confirmBtn) {
+    confirmBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      sendVerificationCode();
+    });
+  }
+});
+
+window.verifyCode = verifyCode;
+</script>
 </body>
 </html>
