@@ -1,40 +1,34 @@
-// TEMP in-memory store
-global.codes = global.codes || {};
-
-exports.handler = async function (event) {
+exports.handler = async function(event) {
   try {
-    const { email, code } = JSON.parse(event.body || '{}');
+    const { code, realCode } = JSON.parse(event.body || '{}');
 
-    if (!email || !code) {
+    if (!code || !realCode) {
       return {
         statusCode: 400,
-        body: JSON.stringify({ success: false, error: "Datos incompletos" }),
+        body: JSON.stringify({
+          success: false,
+          error: "Datos incompletos"
+        }),
       };
     }
 
-    const stored = global.codes[email];
+    console.log("REAL CODE:", realCode);
+    console.log("USER CODE:", code);
 
-    if (!stored) {
-      return {
-        statusCode: 400,
-        body: JSON.stringify({ success: false, error: "Código no encontrado" }),
-      };
-    }
-
-    console.log("Stored:", stored.code);
-    console.log("Entered:", code);
-
-    if (stored.code === code && Date.now() < stored.expires) {
-      delete global.codes[email];
-
+    if (code === realCode) {
       return {
         statusCode: 200,
-        body: JSON.stringify({ success: true }),
+        body: JSON.stringify({
+          success: true
+        }),
       };
     } else {
       return {
         statusCode: 400,
-        body: JSON.stringify({ success: false, error: "Código inválido o expirado" }),
+        body: JSON.stringify({
+          success: false,
+          error: "Código incorrecto"
+        }),
       };
     }
 
@@ -43,7 +37,10 @@ exports.handler = async function (event) {
 
     return {
       statusCode: 500,
-      body: JSON.stringify({ success: false, error: "Error interno" }),
+      body: JSON.stringify({
+        success: false,
+        error: "Error interno"
+      }),
     };
   }
 };
