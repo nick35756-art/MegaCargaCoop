@@ -217,16 +217,91 @@
   </footer>
 
  <script>
-// ====================== FIXED VERIFICATION SYSTEM ======================
+// ====================== FINAL WORKING VERIFICATION ======================
 let currentTempToken = null;
 let currentEmail = null;
 
-async function sendVerificationCode() { ... }   ← (the full function)
+async function sendVerificationCode() {
+  const name = document.getElementById('name').value.trim();
+  const email = document.getElementById('email').value.trim();
 
-async function verifyCode() { ... }
+  if (!name || !email) {
+    alert("Por favor ingresa tu nombre y correo electrónico");
+    return;
+  }
 
-function resendCode() { ... }
+  currentEmail = email;
 
+  try {
+    const response = await fetch('/.netlify/functions/send-code', {
+      method: 'POST',
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ name, email })
+    });
+
+    const data = await response.json();
+
+    if (data.success) {
+      currentTempToken = data.tempToken;
+      
+      // Open verification modal
+      document.getElementById('sent-email').textContent = email;
+      document.getElementById('verify-modal').classList.remove('hidden');
+      document.getElementById('code-input').focus();
+    } else {
+      alert("Error: " + (data.error || "Inténtalo de nuevo"));
+    }
+  } catch (err) {
+    console.error(err);
+    alert("Error de conexión. Inténtalo de nuevo.");
+  }
+}
+
+async function verifyCode() {
+  const code = document.getElementById('code-input').value.trim();
+
+  if (code.length !== 6) {
+    alert("Ingresa el código de 6 dígitos");
+    return;
+  }
+
+  if (!currentTempToken) {
+    alert("Primero confirma tu aporte");
+    return;
+  }
+
+  try {
+    const response = await fetch('/.netlify/functions/verify-code', {
+      method: 'POST',
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        email: currentEmail,
+        code: code,
+        tempToken: currentTempToken
+      })
+    });
+
+    const result = await response.json();
+
+    if (result.success) {
+      alert("✅ ¡Correo verificado correctamente! Gracias por unirte.");
+      document.getElementById('verify-modal').classList.add('hidden');
+    } else {
+      alert("❌ " + (result.error || "Código inválido"));
+      document.getElementById('code-input').value = '';
+    }
+  } catch (err) {
+    alert("Error verificando el código.");
+  }
+}
+
+function resendCode() {
+  if (!currentEmail) return;
+  document.getElementById('code-input').value = '';
+  sendVerificationCode();
+}
+
+// Make button work
 window.sendVerificationCode = sendVerificationCode;
 window.verifyCode = verifyCode;
 window.resendCode = resendCode;
