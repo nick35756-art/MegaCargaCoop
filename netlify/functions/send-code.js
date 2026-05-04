@@ -6,13 +6,31 @@ const resend = new Resend(process.env.RESEND_API_KEY);
 
 exports.handler = async function(event) {
   try {
-    const { email, name } = JSON.parse(event.body || '{}');
+    // More robust body parsing
+    let body;
+    try {
+      body = JSON.parse(event.body || '{}');
+    } catch (e) {
+      body = {};
+    }
+
+    const { email, name } = body;
+
+    if (!email) {
+      return { 
+        statusCode: 400, 
+        body: JSON.stringify({ success: false, error: "Email is required" }) 
+      };
+    }
+
     const code = Math.floor(100000 + Math.random() * 900000).toString();
-    const expires = Date.now() + 15 * 60 * 1000;
+    const expires = Date.now() + 15 * 60 * 1000; // 15 minutes
 
+    // Store code
     const store = getStore("verification-codes");
-    await store.set(email, JSON.stringify({ code, expires }));
+    await store.set(email.toLowerCase(), JSON.stringify({ code, expires }));
 
+    // Send email
     await resend.emails.send({
       from: 'MegaCarga Coop <no-reply@mail.megacargacoop.com>',
       to: email,
@@ -25,9 +43,18 @@ exports.handler = async function(event) {
       `
     });
 
-    return { statusCode: 200, body: JSON.stringify({ success: true }) };
+    console.log(`Code sent to ${email}: ${code}`);
+
+    return { 
+      statusCode: 200, 
+      body: JSON.stringify({ success: true }) 
+    };
+
   } catch (error) {
-    console.error(error);
-    return { statusCode: 500, body: JSON.stringify({ success: false, error: error.message }) };
+    console.error("Send-code error:", error);
+    return { 
+      statusCode: 500, 
+      body: JSON.stringify({ success: false, error: error.message }) 
+    };
   }
 };
