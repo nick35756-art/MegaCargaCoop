@@ -8,9 +8,9 @@ exports.handler = async function(event) {
   try {
     const { email, name } = JSON.parse(event.body || '{}');
     const code = Math.floor(100000 + Math.random() * 900000).toString();
-    const expires = Date.now() + 900000; // 15 minutes
+    const expires = Date.now() + 15 * 60 * 1000; // 15 minutes
 
-    // Store code
+    // Store the code
     const store = getStore("verification-codes");
     await store.set(email, JSON.stringify({ code, expires }));
 
@@ -22,6 +22,7 @@ exports.handler = async function(event) {
         <h2>Hola ${name || 'Cooperativista'},</h2>
         <p>Tu código de verificación es: <strong>${code}</strong></p>
         <p>Este código expira en 15 minutos.</p>
+        <p>Gracias por unirte a MegaCarga Coop.</p>
       `
     });
 
