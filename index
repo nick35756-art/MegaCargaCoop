@@ -9,27 +9,11 @@
   <style>
     body { font-family: 'Inter', system-ui, sans-serif; }
     .hero-bg { background: linear-gradient(135deg, #111827 0%, #1e3a8a 100%); }
-    .lightning { animation: flash 2s infinite; }
   </style>
 </head>
 <body class="bg-zinc-950 text-white">
 
-  <!-- NAV -->
-  <nav class="fixed top-0 w-full bg-black/80 backdrop-blur-lg z-50">
-    <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
-      <div class="flex items-center gap-3">
-        <img src="YOUR-LOGO-IMAGE-URL.png" alt="MegaCarga Coop" class="h-10"/>
-        <span class="font-bold text-2xl tracking-tight">MegaCarga Coop</span>
-      </div>
-      <div class="hidden md:flex gap-8 text-lg">
-        <a href="#como-funciona" class="hover:text-blue-400 transition">Cómo funciona</a>
-        <a href="#principios" class="hover:text-blue-400 transition">Principios</a>
-        <a href="#unete" class="hover:text-blue-400 transition">Únete</a>
-      </div>
-    </div>
-  </nav>
-
-  <!-- HERO with Animated Logo -->
+  <!-- HERO -->
   <section class="hero-bg min-h-screen flex items-center pt-20">
     <div class="max-w-7xl mx-auto px-6 grid md:grid-cols-2 gap-12 items-center">
       <div>
@@ -39,115 +23,80 @@
         <p class="text-2xl text-blue-300 mb-8">
           La primera cooperativa colombiana de <span class="font-bold text-white">Megacargadores Tesla Semi</span>
         </p>
-        <div class="flex items-center gap-4 text-3xl mb-10">
-          <div class="bg-green-500/10 text-green-400 px-6 py-3 rounded-2xl font-mono">1.247 cooperativistas</div>
-          <div class="bg-amber-500/10 text-amber-400 px-6 py-3 rounded-2xl font-mono">$4.8B COP recaudados</div>
+
+        <!-- REAL LIVE COUNTER -->
+        <div class="mb-10 bg-zinc-900/70 border border-blue-500/30 rounded-3xl p-8">
+          <p class="text-sm uppercase tracking-widest text-blue-400 mb-2">Movimiento actual</p>
+          <div id="counter" class="text-6xl md:text-7xl font-bold text-white mb-1">1,247</div>
+          <p class="text-xl text-green-400">cooperativistas • <span id="total" class="font-mono">$4.82B COP</span> comprometidos</p>
         </div>
+
         <a href="#unete" class="inline-block bg-blue-600 hover:bg-blue-500 text-white text-2xl font-semibold px-12 py-6 rounded-3xl transition">
-          ¡Haz tu aporte hoy!
+          ¡Únete ahora!
         </a>
       </div>
 
-      <!-- Animated Logo -->
       <div class="flex justify-center">
         <video autoplay loop muted playsinline class="w-full max-w-lg drop-shadow-2xl">
-          <source src="/grok_video_2026-05-03-20-33-52.mp4" type="video/mp4">
-          Tu navegador no soporta video.
+          <source src="grok_video_2026-05-03-20-33-52.mp4" type="video/mp4">
         </video>
       </div>
     </div>
   </section>
 
-  <!-- STORY -->
-  <section class="py-24 bg-zinc-900">
-    <div class="max-w-5xl mx-auto px-6 text-center">
-      <h2 class="text-4xl font-bold mb-8">El momento es ahora</h2>
-      <p class="text-xl max-w-3xl mx-auto leading-relaxed">
-        Colombia está lista para el transporte pesado eléctrico. Con el crecimiento de la logística y el compromiso nacional con la transición energética, necesitamos una red nacional de Megacargadores Tesla Semi. 
-        <strong class="text-blue-400">MegaCarga Coop</strong> es la primera cooperativa de colombianos que quiere construirla.
+  <!-- PLEDGE FORM -->
+  <section id="unete" class="py-24 bg-zinc-900">
+    <div class="max-w-2xl mx-auto px-6">
+      <h2 class="text-5xl font-bold text-center mb-10">Haz tu aporte</h2>
+      
+      <form name="pledge" method="POST" data-netlify="true" class="space-y-8">
+        <input type="hidden" name="form-name" value="pledge">
+
+        <div>
+          <label class="block mb-2">Nombre completo</label>
+          <input type="text" name="name" required class="w-full bg-zinc-800 border border-zinc-700 rounded-2xl px-6 py-4 text-lg"/>
+        </div>
+
+        <div>
+          <label class="block mb-2">Correo electrónico</label>
+          <input type="email" name="email" required class="w-full bg-zinc-800 border border-zinc-700 rounded-2xl px-6 py-4 text-lg"/>
+        </div>
+
+        <div>
+          <label class="block mb-2">Monto de aporte (COP)</label>
+          <input type="number" name="amount" min="50000" placeholder="500000" required 
+                 class="w-full bg-zinc-800 border border-zinc-700 rounded-2xl px-6 py-4 text-3xl"/>
+        </div>
+
+        <button type="submit" 
+                class="w-full bg-green-600 hover:bg-green-500 py-8 text-3xl font-bold rounded-3xl transition">
+          Confirmar mi aporte
+        </button>
+      </form>
+
+      <p class="text-center text-sm text-zinc-500 mt-8">
+        Recibirás un código de verificación por email. Este es un compromiso de intención.
       </p>
     </div>
   </section>
 
-  <!-- HOW OWNERSHIP WORKS -->
-  <section id="como-funciona" class="py-24 bg-black">
-    <div class="max-w-6xl mx-auto px-6">
-      <h2 class="text-4xl font-bold text-center mb-12">Así funciona la propiedad</h2>
-      <div class="grid md:grid-cols-3 gap-8">
-        <div class="bg-zinc-900 p-10 rounded-3xl text-center">
-          <h3 class="text-6xl font-bold text-blue-400 mb-4">1</h3>
-          <p class="text-2xl font-semibold mb-6">Aportas lo que puedas</p>
-          <p class="text-zinc-400">Desde $50.000 COP. Cada peso cuenta.</p>
-        </div>
-        <div class="bg-zinc-900 p-10 rounded-3xl text-center border-2 border-blue-500">
-          <h3 class="text-6xl font-bold text-blue-400 mb-4">2</h3>
-          <p class="text-2xl font-semibold mb-6">Eres dueño</p>
-          <p class="text-zinc-400">1 cooperativista = 1 voto. Democracia real.</p>
-        </div>
-        <div class="bg-zinc-900 p-10 rounded-3xl text-center">
-          <h3 class="text-6xl font-bold text-blue-400 mb-4">3</h3>
-          <p class="text-2xl font-semibold mb-6">Construimos juntos</p>
-          <p class="text-zinc-400">Los aportes se usan exclusivamente para estaciones de carga.</p>
-        </div>
-      </div>
-    </div>
-  </section>
+  <script>
+    // Real counter (fetches from Netlify function)
+    async function updateCounter() {
+      try {
+        const res = await fetch('/.netlify/functions/counter');
+        const data = await res.json();
+        
+        document.getElementById('counter').textContent = data.count.toLocaleString('es-CO');
+        document.getElementById('total').textContent = '$' + (data.total / 1000000000).toFixed(2) + 'B COP';
+      } catch(e) {
+        console.log("Counter not ready yet");
+      }
+    }
 
-  <!-- PRINCIPLES -->
-  <section id="principios" class="py-24 bg-zinc-900">
-    <div class="max-w-5xl mx-auto px-6">
-      <h2 class="text-4xl font-bold text-center mb-12">Nuestros Principios</h2>
-      <div class="grid md:grid-cols-2 gap-8">
-        <div class="space-y-8">
-          <div class="flex gap-6">
-            <i class="fa-solid fa-handshake text-4xl text-green-400 mt-1"></i>
-            <div><strong>Cooperativismo</strong><p class="text-zinc-400">Propiedad colectiva y gobernanza democrática.</p></div>
-          </div>
-          <div class="flex gap-6">
-            <i class="fa-solid fa-bolt text-4xl text-yellow-400 mt-1"></i>
-            <div><strong>Sostenibilidad</strong><p class="text-zinc-400">Energía limpia para el futuro de Colombia.</p></div>
-          </div>
-        </div>
-        <div class="space-y-8">
-          <div class="flex gap-6">
-            <i class="fa-solid fa-users text-4xl text-blue-400 mt-1"></i>
-            <div><strong>Inclusión</strong><p class="text-zinc-400">Abierto a todos los colombianos.</p></div>
-          </div>
-          <div class="flex gap-6">
-            <i class="fa-solid fa-shield-halved text-4xl text-emerald-400 mt-1"></i>
-            <div><strong>Transparencia</strong><p class="text-zinc-400">Todos los movimientos financieros serán públicos.</p></div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- PLEDGE / JOIN -->
-  <section id="unete" class="py-24 bg-gradient-to-b from-blue-900 to-black">
-    <div class="max-w-3xl mx-auto px-6 text-center">
-      <h2 class="text-5xl font-bold mb-8">Sé parte de la revolución</h2>
-      <form class="space-y-8">
-        <div>
-          <label class="block text-left mb-2">¿Cuánto quieres aportar?</label>
-          <input type="number" placeholder="500.000" class="w-full bg-zinc-900 border border-zinc-700 rounded-2xl px-8 py-6 text-4xl focus:outline-none focus:border-blue-500"/>
-          <p class="text-sm text-zinc-400 mt-2">COP (pesos colombianos)</p>
-        </div>
-        <button type="button" class="w-full bg-green-600 hover:bg-green-500 py-8 text-3xl font-bold rounded-3xl transition">
-          ¡Hacer mi aporte y convertirme en cooperativista!
-        </button>
-      </form>
-      <p class="text-sm text-zinc-500 mt-10">* Este es un compromiso de intención. Los aportes definitivos se formalizarán una vez la cooperativa esté legalmente constituida.</p>
-    </div>
-  </section>
-
-  <!-- FOOTER / LEGAL -->
-  <footer class="bg-black py-16 border-t border-zinc-800">
-    <div class="max-w-5xl mx-auto px-6 text-center text-sm text-zinc-500">
-      <p><strong>IMPORTANTE:</strong> MegaCarga Coop es una cooperativa en formación bajo la Ley 454 de 1998 y normatividad de Supersolidaria de Colombia.</p>
-      <p class="mt-4">Este sitio no constituye una oferta pública de valores ni una invitación a invertir regulada por la Superintendencia Financiera de Colombia. Todos los aportes están sujetos a aprobación y formalización legal.</p>
-      <p class="mt-8">© 2026 MegaCarga Coop • Todos los derechos reservados</p>
-    </div>
-  </footer>
-
+    // Update every 10 seconds
+    setInterval(updateCounter, 10000);
+    window.onload = updateCounter;
+  </script>
 </body>
 </html>
