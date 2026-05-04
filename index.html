@@ -266,16 +266,16 @@
   </script>
   <script>
 <script>
-// ====================== FIXED VERIFICATION SYSTEM ======================
+<script>
+// ====================== FIXED & ROBUST VERIFICATION ======================
 let currentTempToken = null;
 let currentEmail = null;
 
 async function sendVerificationCode() {
-  // Find your form fields (adjust selectors if needed)
-  const name = document.querySelector('input[placeholder*="Nombre"], #name')?.value.trim() || '';
-  const email = document.querySelector('input[placeholder*="Correo"], #email')?.value.trim() || '';
+  const name = document.querySelector('input[placeholder*="Nombre completo"], input[placeholder*="Nombre"], #name')?.value.trim() || '';
+  const email = document.querySelector('input[placeholder*="Correo electrónico"], input[type="email"], #email')?.value.trim() || '';
 
-  if (!email || !name) {
+  if (!name || !email) {
     alert("Por favor ingresa tu nombre y correo electrónico");
     return;
   }
@@ -293,18 +293,18 @@ async function sendVerificationCode() {
 
     if (data.success) {
       currentTempToken = data.tempToken;
-      alert(`✅ Código enviado a ${email}\n\nIngresa el código que recibiste ahora.`);
+      alert(`✅ Código enviado a ${email}\n\nIngresa el código de 6 dígitos que recibiste.`);
     } else {
-      alert("Error: " + (data.error || "Inténtalo de nuevo"));
+      alert("Error enviando código: " + (data.error || ""));
     }
-  } catch (err) {
-    console.error(err);
-    alert("Error de conexión. Inténtalo de nuevo.");
+  } catch (e) {
+    alert("Error de conexión");
   }
 }
 
 async function verifyCode() {
-  const codeInput = document.querySelector('input[placeholder*="Código"], #code-input, input[maxlength="6"]');
+  // Find the code input
+  const codeInput = document.querySelector('input[maxlength="6"], input[placeholder*="Código"], #code-input');
   const code = codeInput ? codeInput.value.trim() : '';
 
   if (code.length !== 6) {
@@ -313,7 +313,7 @@ async function verifyCode() {
   }
 
   if (!currentTempToken || !currentEmail) {
-    alert("Primero haz clic en 'Confirmar mi aporte' para recibir un código");
+    alert("Primero haz clic en 'Confirmar mi aporte'");
     return;
   }
 
@@ -331,19 +331,17 @@ async function verifyCode() {
     const result = await response.json();
 
     if (result.success) {
-      alert("✅ ¡Correo verificado correctamente! 🎉");
-      // Add your success flow here (e.g. hide modal, show thank you, etc.)
+      alert("✅ ¡Verificación exitosa! Gracias por unirte.");
     } else {
-      alert("❌ " + (result.error || "Código inválido o expirado"));
+      alert("❌ " + (result.error || "Código inválido"));
       if (codeInput) codeInput.value = '';
     }
-  } catch (err) {
-    console.error(err);
+  } catch (e) {
     alert("Error interno. Inténtalo de nuevo.");
   }
 }
 
-// Make functions available to your buttons
+// Make buttons work
 window.sendVerificationCode = sendVerificationCode;
 window.verifyCode = verifyCode;
 </script>
