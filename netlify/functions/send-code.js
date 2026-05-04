@@ -8,9 +8,8 @@ exports.handler = async function(event) {
   try {
     const { email, name } = JSON.parse(event.body || '{}');
     const code = Math.floor(100000 + Math.random() * 900000).toString();
-    const expires = Date.now() + 15 * 60 * 1000; // 15 minutes
+    const expires = Date.now() + 15 * 60 * 1000;
 
-    // Store the code
     const store = getStore("verification-codes");
     await store.set(email, JSON.stringify({ code, expires }));
 
