@@ -216,88 +216,17 @@
     </div>
   </footer>
 
-  <script>
-// ====================== FINAL FIXED VERIFICATION SYSTEM ======================
+ <script>
+// ====================== FIXED VERIFICATION SYSTEM ======================
 let currentTempToken = null;
 let currentEmail = null;
 
-async function sendVerificationCode() {
-  const name = document.getElementById('name').value.trim();
-  const email = document.getElementById('email').value.trim();
+async function sendVerificationCode() { ... }   ← (the full function)
 
-  if (!name || !email) {
-    alert("Por favor ingresa tu nombre y correo electrónico");
-    return;
-  }
+async function verifyCode() { ... }
 
-  currentEmail = email;
+function resendCode() { ... }
 
-  try {
-    const response = await fetch('/.netlify/functions/send-code', {
-      method: 'POST',
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ name, email })
-    });
-
-    const data = await response.json();
-
-    if (data.success) {
-      currentTempToken = data.tempToken;
-      alert(`✅ Código enviado a ${email}\n\nRevisa tu correo e ingresa el código de 6 dígitos.`);
-    } else {
-      alert("Error enviando código: " + (data.error || "Inténtalo de nuevo"));
-    }
-  } catch (err) {
-    console.error(err);
-    alert("Error de conexión. Inténtalo de nuevo.");
-  }
-}
-
-async function verifyCode() {
-  const code = document.getElementById('code-input').value.trim();
-
-  if (code.length !== 6) {
-    alert("Ingresa el código de 6 dígitos");
-    return;
-  }
-
-  if (!currentTempToken || !currentEmail) {
-    alert("Primero haz clic en 'Confirmar mi aporte'");
-    return;
-  }
-
-  try {
-    const response = await fetch('/.netlify/functions/verify-code', {
-      method: 'POST',
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        email: currentEmail,
-        code: code,
-        tempToken: currentTempToken
-      })
-    });
-
-    const result = await response.json();
-
-    if (result.success) {
-      alert("✅ ¡Correo verificado correctamente! Gracias por unirte a MegaCarga Coop.");
-      document.getElementById('verify-modal').classList.add('hidden');
-    } else {
-      alert("❌ " + (result.error || "Código inválido o expirado"));
-      document.getElementById('code-input').value = '';
-    }
-  } catch (err) {
-    alert("Error verificando el código.");
-  }
-}
-
-function resendCode() {
-  if (!currentEmail) return;
-  document.getElementById('code-input').value = '';
-  sendVerificationCode();   // reuse the function
-}
-
-// Make functions available globally
 window.sendVerificationCode = sendVerificationCode;
 window.verifyCode = verifyCode;
 window.resendCode = resendCode;
