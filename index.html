@@ -265,16 +265,15 @@
     }
   </script>
   <script>
-// ====================== VERIFICATION SYSTEM (Fixed) ======================
+<script>
+// ====================== FIXED VERIFICATION SYSTEM ======================
 let currentTempToken = null;
 let currentEmail = null;
 
 async function sendVerificationCode() {
-  const nameField = document.querySelector('input[placeholder="Nombre completo"]') || document.getElementById('name');
-  const emailField = document.querySelector('input[placeholder="Correo electrónico"]') || document.getElementById('email');
-  
-  const name = nameField ? nameField.value.trim() : '';
-  const email = emailField ? emailField.value.trim() : '';
+  // Find your form fields (adjust selectors if needed)
+  const name = document.querySelector('input[placeholder*="Nombre"], #name')?.value.trim() || '';
+  const email = document.querySelector('input[placeholder*="Correo"], #email')?.value.trim() || '';
 
   if (!email || !name) {
     alert("Por favor ingresa tu nombre y correo electrónico");
@@ -294,11 +293,9 @@ async function sendVerificationCode() {
 
     if (data.success) {
       currentTempToken = data.tempToken;
-      alert(`✅ Código enviado a ${email}\n\nAhora ingresa el código que recibiste.`);
-      
-      // Optional: You can hide the form and show a verification modal if you want
+      alert(`✅ Código enviado a ${email}\n\nIngresa el código que recibiste ahora.`);
     } else {
-      alert("Error al enviar: " + (data.error || "Inténtalo de nuevo"));
+      alert("Error: " + (data.error || "Inténtalo de nuevo"));
     }
   } catch (err) {
     console.error(err);
@@ -307,16 +304,16 @@ async function sendVerificationCode() {
 }
 
 async function verifyCode() {
-  const codeField = document.querySelector('input[placeholder="Código de 6 dígitos"]') || document.getElementById('code-input');
-  const code = codeField ? codeField.value.trim() : '';
+  const codeInput = document.querySelector('input[placeholder*="Código"], #code-input, input[maxlength="6"]');
+  const code = codeInput ? codeInput.value.trim() : '';
 
   if (code.length !== 6) {
     alert("Ingresa el código de 6 dígitos");
     return;
   }
 
-  if (!currentTempToken) {
-    alert("Primero confirma tu aporte para recibir un código");
+  if (!currentTempToken || !currentEmail) {
+    alert("Primero haz clic en 'Confirmar mi aporte' para recibir un código");
     return;
   }
 
@@ -335,10 +332,10 @@ async function verifyCode() {
 
     if (result.success) {
       alert("✅ ¡Correo verificado correctamente! 🎉");
-      // You can redirect or show success message here
+      // Add your success flow here (e.g. hide modal, show thank you, etc.)
     } else {
       alert("❌ " + (result.error || "Código inválido o expirado"));
-      if (codeField) codeField.value = '';
+      if (codeInput) codeInput.value = '';
     }
   } catch (err) {
     console.error(err);
@@ -346,19 +343,8 @@ async function verifyCode() {
   }
 }
 
-// Attach to buttons (works with your current HTML)
-document.addEventListener('DOMContentLoaded', () => {
-  const confirmBtn = document.querySelector('button:contains("Confirmar mi aporte")') || 
-                     Array.from(document.querySelectorAll('button')).find(b => b.textContent.includes('Confirmar'));
-  
-  if (confirmBtn) {
-    confirmBtn.addEventListener('click', (e) => {
-      e.preventDefault();
-      sendVerificationCode();
-    });
-  }
-});
-
+// Make functions available to your buttons
+window.sendVerificationCode = sendVerificationCode;
 window.verifyCode = verifyCode;
 </script>
 </body>
