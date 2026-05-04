@@ -217,63 +217,13 @@
   </footer>
 
   <script>
-    let pendingData = {};
-
-    async function submitPledge() {
-      const name = document.getElementById('name').value;
-      const email = document.getElementById('email').value;
-      const amount = document.getElementById('amount').value;
-
-      if (!name || !email || !amount) return alert("Por favor completa todos los campos");
-
-      pendingData = { name, email, amount };
-      document.getElementById('sent-email').textContent = email;
-      document.getElementById('verify-modal').classList.remove('hidden');
-
-      await fetch('/.netlify/functions/send-code', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email, name })
-      });
-    }
-
-    async function verifyCode() {
-      const code = document.getElementById('code-input').value.trim();
-      if (code.length !== 6) return alert("Ingresa el código de 6 dígitos");
-
-      const res = await fetch('/.netlify/functions/verify-code', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email: pendingData.email, code })
-      });
-
-      const data = await res.json();
-      if (data.success) {
-        alert("✅ ¡Verificación exitosa! Gracias por unirte a MegaCarga Coop.");
-        document.getElementById('verify-modal').classList.add('hidden');
-      } else {
-        alert(data.error || "Código inválido");
-      }
-    }
-
-    function resendCode() {
-      fetch('/.netlify/functions/send-code', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email: pendingData.email, name: pendingData.name })
-      });
-      alert("✅ Nuevo código enviado");
-    }
-  </script>
-  
-<script>
-// ====================== VERIFICATION SYSTEM ======================
+// ====================== FINAL FIXED VERIFICATION SYSTEM ======================
 let currentTempToken = null;
 let currentEmail = null;
 
 async function sendVerificationCode() {
-  const name = document.querySelector('input[placeholder*="Nombre completo"], input[name="name"]')?.value.trim();
-  const email = document.querySelector('input[placeholder*="Correo electrónico"], input[type="email"]')?.value.trim();
+  const name = document.getElementById('name').value.trim();
+  const email = document.getElementById('email').value.trim();
 
   if (!name || !email) {
     alert("Por favor ingresa tu nombre y correo electrónico");
@@ -295,23 +245,23 @@ async function sendVerificationCode() {
       currentTempToken = data.tempToken;
       alert(`✅ Código enviado a ${email}\n\nRevisa tu correo e ingresa el código de 6 dígitos.`);
     } else {
-      alert("Error: " + (data.error || "Inténtalo de nuevo"));
+      alert("Error enviando código: " + (data.error || "Inténtalo de nuevo"));
     }
   } catch (err) {
+    console.error(err);
     alert("Error de conexión. Inténtalo de nuevo.");
   }
 }
 
 async function verifyCode() {
-  const codeInput = document.querySelector('input[maxlength="6"], input[placeholder*="código"], #verification-code');
-  const code = codeInput ? codeInput.value.trim() : '';
+  const code = document.getElementById('code-input').value.trim();
 
   if (code.length !== 6) {
-    alert("Por favor ingresa el código de 6 dígitos");
+    alert("Ingresa el código de 6 dígitos");
     return;
   }
 
-  if (!currentTempToken) {
+  if (!currentTempToken || !currentEmail) {
     alert("Primero haz clic en 'Confirmar mi aporte'");
     return;
   }
@@ -330,20 +280,27 @@ async function verifyCode() {
     const result = await response.json();
 
     if (result.success) {
-      alert("✅ ¡Correo verificado correctamente! Gracias por tu aporte.");
-      // You can add success actions here (hide form, show thank you, etc.)
+      alert("✅ ¡Correo verificado correctamente! Gracias por unirte a MegaCarga Coop.");
+      document.getElementById('verify-modal').classList.add('hidden');
     } else {
       alert("❌ " + (result.error || "Código inválido o expirado"));
-      if (codeInput) codeInput.value = '';
+      document.getElementById('code-input').value = '';
     }
   } catch (err) {
     alert("Error verificando el código.");
   }
 }
 
-// Make functions available
+function resendCode() {
+  if (!currentEmail) return;
+  document.getElementById('code-input').value = '';
+  sendVerificationCode();   // reuse the function
+}
+
+// Make functions available globally
 window.sendVerificationCode = sendVerificationCode;
 window.verifyCode = verifyCode;
+window.resendCode = resendCode;
 </script>
 </body>
 </html>
