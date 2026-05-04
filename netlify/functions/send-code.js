@@ -13,8 +13,8 @@ exports.handler = async function(event) {
 
     const code = Math.floor(100000 + Math.random() * 900000).toString();
 
-    const result = await resend.emails.send({
-      from: 'MegaCarga Coop <onboarding@resend.dev>',   // ← Safe default
+    await resend.emails.send({
+      from: 'MegaCarga Coop <onboarding@resend.dev>',   // ← This works reliably
       to: email,
       subject: 'Tu código de verificación - MegaCarga Coop',
       html: `
@@ -25,11 +25,11 @@ exports.handler = async function(event) {
       `
     });
 
-    console.log("Email sent successfully to:", email);
+    console.log(`✅ Code sent to ${email}`);
 
     return { statusCode: 200, body: JSON.stringify({ success: true }) };
   } catch (error) {
-    console.error("Send error:", error);
+    console.error("Resend Error:", error);
     return { 
       statusCode: 500, 
       body: JSON.stringify({ success: false, error: error.message }) 
