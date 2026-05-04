@@ -1,189 +1,268 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>MegaCarga Coop - Primera Cooperativa de Megacargadores Tesla Semi en Colombia</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="MegaCarga Coop - La primera cooperativa colombiana para construir Megacargadores Tesla Semi. Únete y sé dueño del futuro de la energía en Colombia." />
   
-  <!-- Tailwind CDN (you were using it) -->
+  <meta property="og:title" content="MegaCarga Coop - Megacargadores Tesla Semi en Colombia" />
+  <meta property="og:description" content="Construyamos juntos la red de carga del futuro. 1 voto = 1 voz. Ganancias compartidas." />
+  <meta property="og:image" content="https://megacargacoop.com/grok_image_1777858398395.jpg" />
+  <meta property="og:url" content="https://megacargacoop.com" />
+  <meta property="og:type" content="website" />
+
+  <title>MegaCarga Coop - Megacargadores Tesla Semi en Colombia</title>
   <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"/>
+  <link rel="icon" href="grok_image_1777858398395.jpg" type="image/jpeg">
   
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
-    
     body { font-family: 'Inter', system-ui, sans-serif; }
-    
-    /* SECOND SCROLLING BANNER - RIGHT TO LEFT (Slower) */
+    .hero-bg { background: linear-gradient(135deg, #111827 0%, #1e3a8a 100%); }
+    .ticker { overflow: hidden; white-space: nowrap; }
+    .ticker-content { display: inline-block; animation: ticker 35s linear infinite; }
+    @keyframes ticker { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+  </style>
+  <style>
+  /* SECOND BANNER - RIGHT TO LEFT (Slower) */
+  .banner-reverse {
+    background: linear-gradient(90deg, #000, #1a1a1a);
+    color: #ffd700;
+    padding: 14px 0;
+    font-size: 1.1rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+    white-space: nowrap;
+    overflow: hidden;
+    margin: 25px 0 30px 0;
+    border-top: 3px solid #ffd700;
+    border-bottom: 3px solid #ffd700;
+    box-shadow: 0 4px 15px rgba(255, 215, 0, 0.3);
+  }
+
+  .banner-reverse span {
+    display: inline-block;
+    padding-left: 100%;
+    animation: scrollRightToLeft 48s linear infinite;   /* ← Slowed down from 32s */
+  }
+
+  @keyframes scrollRightToLeft {
+    0%   { transform: translateX(0); }
+    100% { transform: translateX(-100%); }
+  }
+
+  .banner-reverse:hover span {
+    animation-play-state: paused;
+  }
+
+  /* Mobile - still slower */
+  @media (max-width: 768px) {
     .banner-reverse {
-      background: linear-gradient(90deg, #000, #1a1a1a);
-      color: #ffd700;
-      padding: 14px 0;
-      font-size: 1.1rem;
-      font-weight: 700;
-      letter-spacing: 1px;
-      white-space: nowrap;
-      overflow: hidden;
-      margin: 25px 0 30px 0;
-      border-top: 3px solid #ffd700;
-      border-bottom: 3px solid #ffd700;
-      box-shadow: 0 4px 15px rgba(255, 215, 0, 0.3);
+      font-size: 0.95rem;
+      padding: 12px 0;
     }
     .banner-reverse span {
-      display: inline-block;
-      padding-left: 100%;
-      animation: scrollRightToLeft 48s linear infinite;
+      animation-duration: 38s;   /* ← Slowed down for mobile too */
     }
-    @keyframes scrollRightToLeft {
-      0% { transform: translateX(0); }
-      100% { transform: translateX(-100%); }
-    }
-    .banner-reverse:hover span {
-      animation-play-state: paused;
-    }
-    @media (max-width: 768px) {
-      .banner-reverse { font-size: 0.95rem; padding: 12px 0; }
-      .banner-reverse span { animation-duration: 38s; }
-    }
-  </style>
+  }
+</style>
 </head>
-<body class="bg-black text-white">
+<body class="bg-zinc-950 text-white pb-32">
 
-  <!-- TOP BANNER -->
-  <div class="banner bg-yellow-400 text-black py-3 text-center font-bold overflow-hidden whitespace-nowrap">
-    <span>HELP BUILD THE FUTURE • MÍNIMO $1.000.000 COP TE DA ENTRADA • UN VOTO POR MIEMBRO • GANANCIAS COMPARTIDAS POR TODOS • </span>
-  </div>
-
-  <!-- HERO / PRE-LANZAMIENTO -->
-  <div class="max-w-7xl mx-auto px-6 py-12 text-center">
-    <h1 class="text-6xl font-bold mb-4">● PRE-LANZAMIENTO</h1>
-    <div class="text-5xl font-bold text-yellow-400 mb-8">$28.450.000.000 COP</div>
-    <p class="text-2xl">COMPROMETIDOS TOTALES</p>
-    <!-- Add your other counters here if needed -->
-  </div>
-
-  <!-- SIMPLE. DEMOCRÁTICO. -->
-  <div class="max-w-7xl mx-auto px-6 py-12">
-    <h2 class="text-6xl font-bold text-center mb-12">SIMPLE. DEMOCRÁTICO.</h2>
-    <!-- Your 4 steps go here - add them back if missing -->
-  </div>
-
-  <!-- SECOND BANNER (Right to Left) -->
-  <div class="banner-reverse">
-    <span>
-      HELP BUILD THE FUTURE • MÍNIMO $1.000.000 COP TE DA ENTRADA • UN VOTO POR MIEMBRO • GANANCIAS COMPARTIDAS POR TODOS • 
-      HELP BUILD THE FUTURE • MÍNIMO $1.000.000 COP TE DA ENTRADA • UN VOTO POR MIEMBRO • GANANCIAS COMPARTIDAS POR TODOS • 
-      HELP BUILD THE FUTURE • MÍNIMO $1.000.000 COP TE DA ENTRADA • UN VOTO POR MIEMBRO • GANANCIAS COMPARTIDAS POR TODOS •
-    </span>
-  </div>
-
-  <!-- HAZ TU APORTE -->
-  <section class="max-w-4xl mx-auto px-6 py-12">
-    <h2 class="text-4xl font-bold text-center mb-8">Haz tu aporte</h2>
-    
-    <!-- SEND FORM -->
-    <div id="send-form" class="grid md:grid-cols-4 gap-4 max-w-2xl mx-auto">
-      <input type="text" id="name" placeholder="Nombre completo" class="bg-zinc-900 border border-zinc-700 rounded-lg px-4 py-3">
-      <input type="email" id="email" placeholder="Correo electrónico" class="bg-zinc-900 border border-zinc-700 rounded-lg px-4 py-3">
-      <input type="number" id="amount" placeholder="Monto de aporte (COP)" class="bg-zinc-900 border border-zinc-700 rounded-lg px-4 py-3">
-      <button onclick="sendVerificationCode()" 
-              class="bg-blue-600 hover:bg-blue-700 font-semibold py-3 rounded-lg">
-        Confirmar mi aporte
-      </button>
+  <!-- YELLOW STATS BAR -->
+  <div class="bg-yellow-400 text-black py-4 font-bold border-b-4 border-black">
+    <div class="max-w-7xl mx-auto px-6 flex flex-wrap justify-center gap-x-10 md:gap-x-16 text-center">
+      <div class="flex items-center gap-2">
+        <span class="text-red-600">●</span>
+        <span class="uppercase text-sm tracking-widest">PRE-LANZAMIENTO</span>
+      </div>
+      <div><div class="text-4xl font-black">$28.450.000.000 COP</div><div class="text-sm -mt-1">COMPROMETIDOS TOTALES</div></div>
+      <div><div class="text-4xl font-black">2.847</div><div class="text-sm -mt-1">CORREOS VERIFICADOS</div></div>
+      <div><div class="text-4xl font-black">$9.800.000 COP</div><div class="text-sm -mt-1">PROMEDIO POR APORTE</div></div>
     </div>
+  </div>
 
-    <!-- VERIFY SECTION -->
-    <div id="verify-section" style="display: none;" class="max-w-md mx-auto mt-8 text-center">
-      <p class="mb-4">Hemos enviado un código de 6 dígitos a <strong id="display-email"></strong></p>
-      <input type="text" id="code-input" maxlength="6" placeholder="000000" 
-             class="bg-zinc-900 border border-yellow-400 text-4xl text-center tracking-widest w-full py-6 rounded-xl mb-4">
-      <button onclick="verifyCode()" class="w-full bg-green-600 hover:bg-green-700 py-4 rounded-xl font-bold text-lg">
-        Verificar Código
-      </button>
-      <button onclick="resendCode()" class="text-yellow-400 mt-4 underline">Reenviar código</button>
+  <!-- SECOND SCROLLING TICKER (under yellow bar) -->
+  <div class="ticker py-3 bg-black text-yellow-400 text-sm font-bold border-b border-yellow-500">
+    <div class="ticker-content flex items-center gap-12">
+      HELP BUILD THE FUTURE • MÍNIMO $1.000.000 COP TE DA ENTRADA • UN VOTO POR MIEMBRO • GANANCIAS COMPARTIDAS POR TODOS • 
+      HELP BUILD THE FUTURE • MÍNIMO $1.000.000 COP TE DA ENTRADA • UN VOTO POR MIEMBRO • GANANCIAS COMPARTIDAS POR TODOS • 
+    </div>
+  </div>
+
+  <!-- HERO -->
+  <section class="hero-bg min-h-screen flex items-center pt-20">
+    <div class="max-w-7xl mx-auto px-6 grid md:grid-cols-2 gap-12 items-center">
+      <div>
+        <h1 class="text-5xl md:text-7xl font-bold leading-tight mb-6">
+          ¡La energía del futuro<br>la construimos juntos!
+        </h1>
+        <p class="text-2xl text-blue-300 mb-8">
+          La primera cooperativa colombiana de <span class="font-bold text-white">Megacargadores Tesla Semi</span>
+        </p>
+        <a href="#unete" class="inline-block bg-blue-600 hover:bg-blue-500 text-white text-2xl font-semibold px-12 py-6 rounded-3xl transition">
+          ¡Únete ahora!
+        </a>
+      </div>
+      <div class="flex justify-center">
+        <img src="grok_image_1777858398395.jpg" alt="MegaCarga Coop Logo" class="w-full max-w-lg drop-shadow-2xl rounded-3xl">
+      </div>
     </div>
   </section>
 
-  <!-- Footer -->
-  <footer class="text-center py-8 text-zinc-500">
-    © 2026 MegaCarga Coop • Todos los derechos reservados
+  <!-- GOAL -->
+  <div class="bg-amber-600 py-6 text-center">
+    <p class="text-xl font-semibold">Necesitamos recaudar <span class="text-4xl font-bold">29.256 mil millones COP</span></p>
+    <p class="text-amber-200">(aprox. $8.000.000 USD)</p>
+  </div>
+
+  <!-- HOW OWNERSHIP WORKS -->
+  <section class="py-24 bg-black">
+    <div class="max-w-6xl mx-auto px-6">
+      <div class="text-center mb-12">
+        <span class="bg-yellow-500 text-black px-4 py-1 text-sm font-bold uppercase tracking-widest">CÓMO FUNCIONA LA PROPIEDAD</span>
+        <h2 class="text-6xl font-bold mt-6 leading-none">
+          UN VOTO.<br><span class="text-white">GANANCIAS COMPARTIDAS.</span>
+        </h2>
+      </div>
+
+      <div class="overflow-x-auto mb-16">
+        <table class="w-full border-collapse bg-zinc-900 rounded-3xl overflow-hidden">
+          <thead>
+            <tr class="bg-yellow-500 text-black">
+              <th class="px-8 py-6 text-left font-bold">MONTO DE APORTE</th>
+              <th class="px-8 py-6 text-left font-bold">PESO DE VOTO</th>
+              <th class="px-8 py-6 text-left font-bold">PARTICIPACIÓN EN GANANCIAS</th>
+              <th class="px-8 py-6 text-left font-bold">ESTATUS</th>
+            </tr>
+          </thead>
+          <tbody class="text-white divide-y divide-zinc-800">
+            <tr><td class="px-8 py-6">$1.000.000 COP</td><td class="px-8 py-6">1 voto</td><td class="px-8 py-6">Base</td><td class="px-8 py-6">Cooperativista</td></tr>
+            <tr><td class="px-8 py-6">$10.000.000 COP</td><td class="px-8 py-6">1 voto</td><td class="px-8 py-6">~10x base</td><td class="px-8 py-6">Cooperativista</td></tr>
+            <tr><td class="px-8 py-6">$40.000.000 COP</td><td class="px-8 py-6">1 voto</td><td class="px-8 py-6">~40x base</td><td class="px-8 py-6">Cooperativista</td></tr>
+            <tr><td class="px-8 py-6">$200.000.000 COP+</td><td class="px-8 py-6">1 voto</td><td class="px-8 py-6">Proporcional</td><td class="px-8 py-6">⭐ Socio Fundador</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4 STEPS -->
+  <section class="py-24 bg-yellow-500 text-black">
+    <div class="max-w-7xl mx-auto px-6">
+      <h2 class="text-6xl font-black text-center mb-12">SIMPLE. DEMOCRÁTICO.</h2>
+      <div class="grid md:grid-cols-4 gap-8">
+        <div class="bg-white p-8 rounded-3xl"><div class="text-6xl font-black text-yellow-500 mb-4">1</div><h4 class="font-bold text-2xl mb-4">HAZ TU APORTE</h4><p>Registra tu intención.</p></div>
+        <div class="bg-white p-8 rounded-3xl"><div class="text-6xl font-black text-yellow-500 mb-4">2</div><h4 class="font-bold text-2xl mb-4">CONSTRUIMOS LA COALICIÓN</h4><p>Tus aportes se suman.</p></div>
+        <div class="bg-white p-8 rounded-3xl"><div class="text-6xl font-black text-yellow-500 mb-4">3</div><h4 class="font-bold text-2xl mb-4">SE CONSTRUYE LA RED</h4><p>Con 29.256 mil millones COP instalamos todo.</p></div>
+        <div class="bg-white p-8 rounded-3xl"><div class="text-6xl font-black text-yellow-500 mb-4">4</div><h4 class="font-bold text-2xl mb-4">TÚ ERES DUEÑO</h4><p>1 voto = 1 voz.</p></div>
+      </div>
+      <!-- SECOND SCROLLING BANNER - RIGHT TO LEFT -->
+<div class="banner-reverse">
+  <span>
+    HELP BUILD THE FUTURE • MÍNIMO $1.000.000 COP TE DA ENTRADA • UN VOTO POR MIEMBRO • GANANCIAS COMPARTIDAS POR TODOS • 
+    HELP BUILD THE FUTURE • MÍNIMO $1.000.000 COP TE DA ENTRADA • UN VOTO POR MIEMBRO • GANANCIAS COMPARTIDAS POR TODOS • 
+    HELP BUILD THE FUTURE • MÍNIMO $1.000.000 COP TE DA ENTRADA • UN VOTO POR MIEMBRO • GANANCIAS COMPARTIDAS POR TODOS •
+  </span>
+</div>
+    </div>
+  </section>
+
+  <!-- PLEDGE FORM -->
+  <section id="unete" class="py-24 bg-zinc-900">
+    <div class="max-w-2xl mx-auto px-6">
+      <h2 class="text-5xl font-bold text-center mb-10">Haz tu aporte</h2>
+      <form id="pledge-form" class="space-y-8">
+        <div><label class="block mb-2 text-zinc-300">Nombre completo</label><input type="text" id="name" required class="w-full bg-zinc-800 border border-zinc-700 rounded-2xl px-6 py-4 text-lg"/></div>
+        <div><label class="block mb-2 text-zinc-300">Correo electrónico</label><input type="email" id="email" required class="w-full bg-zinc-800 border border-zinc-700 rounded-2xl px-6 py-4 text-lg"/></div>
+        <div><label class="block mb-2 text-zinc-300">Monto de aporte (COP)</label><input type="number" id="amount" min="1000000" placeholder="1000000" required class="w-full bg-zinc-800 border border-zinc-700 rounded-2xl px-6 py-4 text-3xl"/></div>
+        <button type="button" onclick="submitPledge()" class="w-full bg-green-600 hover:bg-green-500 py-8 text-3xl font-bold rounded-3xl transition">
+          Confirmar mi aporte
+        </button>
+      </form>
+    </div>
+  </section>
+
+  <!-- VERIFICATION MODAL -->
+  <div id="verify-modal" class="hidden fixed inset-0 bg-black/80 flex items-center justify-center z-[100]">
+    <div class="bg-zinc-900 p-10 rounded-3xl max-w-md w-full mx-4">
+      <h3 class="text-2xl font-bold mb-6 text-center">Verifica tu correo</h3>
+      <p class="text-center text-zinc-400 mb-8">Hemos enviado un código de 6 dígitos a <span id="sent-email" class="font-medium text-white"></span></p>
+      <input type="text" id="code-input" maxlength="6" placeholder="123456" class="w-full text-center text-4xl tracking-widest bg-zinc-800 border border-zinc-700 rounded-2xl py-6 focus:outline-none focus:border-blue-500"/>
+      <button onclick="verifyCode()" class="mt-6 w-full bg-blue-600 hover:bg-blue-500 py-6 text-xl font-bold rounded-3xl">Verificar Código</button>
+      <p onclick="resendCode()" class="text-center text-blue-400 mt-6 cursor-pointer hover:underline">Reenviar código</p>
+    </div>
+  </div>
+
+  <!-- FOOTER DISCLAIMER -->
+  <footer class="bg-black py-12 border-t border-zinc-800">
+    <div class="max-w-7xl mx-auto px-6">
+      <div class="flex items-center gap-4 mb-8">
+        <img src="grok_image_1777858398395.jpg" alt="MegaCarga Coop" class="h-10">
+        <div>
+          <span class="text-yellow-400 font-bold text-xl">MEGACARGA COOP</span><br>
+          <span class="text-zinc-500 text-sm">Una Iniciativa Cooperativa Colombiana • Est. 2026</span>
+        </div>
+      </div>
+      <p class="text-zinc-400 text-sm leading-relaxed max-w-3xl">
+        MegaCarga Coop es un esfuerzo cooperativo de base para construir infraestructura de carga para Tesla Semi en Colombia. 
+        Esta plataforma recolecta solo compromisos de intención no vinculantes. No se están recaudando fondos en este momento. 
+        Este sitio <strong>NO</strong> constituye una oferta pública de valores ni instrumento financiero.
+      </p>
+      <div class="mt-12 text-center text-xs text-zinc-500">
+        © 2026 MegaCarga Coop • Todos los derechos reservados
+      </div>
+    </div>
   </footer>
 
   <script>
-    let currentTempToken = null;
-    let currentEmail = null;
+    let pendingData = {};
 
-    async function sendVerificationCode() {
-      const name = document.getElementById('name').value.trim();
-      const email = document.getElementById('email').value.trim();
+    async function submitPledge() {
+      const name = document.getElementById('name').value;
+      const email = document.getElementById('email').value;
+      const amount = document.getElementById('amount').value;
 
-      if (!email || !name) {
-        alert("Por favor ingresa tu nombre y correo electrónico");
-        return;
-      }
+      if (!name || !email || !amount) return alert("Por favor completa todos los campos");
 
-      currentEmail = email;
-      document.getElementById('display-email').textContent = email;
+      pendingData = { name, email, amount };
+      document.getElementById('sent-email').textContent = email;
+      document.getElementById('verify-modal').classList.remove('hidden');
 
-      try {
-        const response = await fetch('/.netlify/functions/send-code', {
-          method: 'POST',
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ name, email })
-        });
-
-        const data = await response.json();
-
-        if (data.success) {
-          currentTempToken = data.tempToken;
-          document.getElementById('send-form').style.display = 'none';
-          document.getElementById('verify-section').style.display = 'block';
-        } else {
-          alert("Error: " + (data.error || "Inténtalo de nuevo"));
-        }
-      } catch (err) {
-        alert("Error de conexión. Inténtalo de nuevo.");
-      }
+      await fetch('/.netlify/functions/send-code', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email, name })
+      });
     }
 
     async function verifyCode() {
       const code = document.getElementById('code-input').value.trim();
-      if (code.length !== 6) {
-        alert("Ingresa el código de 6 dígitos");
-        return;
-      }
+      if (code.length !== 6) return alert("Ingresa el código de 6 dígitos");
 
-      try {
-        const response = await fetch('/.netlify/functions/verify-code', {
-          method: 'POST',
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            email: currentEmail,
-            code: code,
-            tempToken: currentTempToken
-          })
-        });
+      const res = await fetch('/.netlify/functions/verify-code', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email: pendingData.email, code })
+      });
 
-        const result = await response.json();
-
-        if (result.success) {
-          alert("✅ ¡Correo verificado correctamente! Puedes continuar.");
-        } else {
-          alert("❌ " + (result.error || "Código inválido"));
-          document.getElementById('code-input').value = '';
-        }
-      } catch (err) {
-        alert("Error interno. Inténtalo de nuevo.");
+      const data = await res.json();
+      if (data.success) {
+        alert("✅ ¡Verificación exitosa! Gracias por unirte a MegaCarga Coop.");
+        document.getElementById('verify-modal').classList.add('hidden');
+      } else {
+        alert(data.error || "Código inválido");
       }
     }
 
-    async function resendCode() {
-      document.getElementById('code-input').value = '';
-      await sendVerificationCode();
+    function resendCode() {
+      fetch('/.netlify/functions/send-code', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email: pendingData.email, name: pendingData.name })
+      });
+      alert("✅ Nuevo código enviado");
     }
-
-    window.sendVerificationCode = sendVerificationCode;
-    window.verifyCode = verifyCode;
-    window.resendCode = resendCode;
   </script>
 </body>
 </html>
