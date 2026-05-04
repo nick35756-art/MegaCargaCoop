@@ -14,7 +14,7 @@ exports.handler = async function(event) {
     const code = Math.floor(100000 + Math.random() * 900000).toString();
 
     await resend.emails.send({
-      from: 'MegaCarga Coop <onboarding@resend.dev>',   // ← This works reliably
+      from: 'MegaCarga Coop <verify@mail.megacargacoop.com>',   // ← This works reliably
       to: email,
       subject: 'Tu código de verificación - MegaCarga Coop',
       html: `
