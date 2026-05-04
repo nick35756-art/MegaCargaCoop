@@ -1,17 +1,47 @@
 // netlify/functions/verify-code.js
-// For simplicity we're using a simple in-memory check (you can improve later)
-const codes = new Map(); // In real use, use Netlify Blobs or a DB
+const { getStore } = require("@netlify/blobs");
 
 exports.handler = async function(event) {
-  const { email, code } = JSON.parse(event.body);
+  try {
+    const { email, code } = JSON.parse(event.body || '{}');
 
-  // For demo - in real version compare with stored code
-  if (code === "123456") {   // Replace with real check later
-    return { statusCode: 200, body: JSON.stringify({ success: true }) };
+    if (!email || !code) {
+      return {
+        statusCode: 400,
+        body: JSON.stringify({ success: false, error: "Faltan datos" })
+      };
+    }
+
+    const store = getStore("verification-codes");
+    const stored = await store.get(email);
+
+    if (!stored) {
+      return {
+        statusCode: 400,
+        body: JSON.stringify({ success: false, error: "Código expirado o no encontrado" })
+      };
+    }
+
+    const data = JSON.parse(stored);
+
+    if (data.code === code && Date.now() < data.expires) {
+      // Success - optionally delete the code after use
+      await store.delete(email);
+      
+      return {
+        statusCode: 200,
+        body: JSON.stringify({ success: true })
+      };
+    } else {
+      return {
+        statusCode: 400,
+        body: JSON.stringify({ success: false, error: "Código inválido o expirado" })
+      };
+    }
+  } catch (error) {
+    return {
+      statusCode: 500,
+      body: JSON.stringify({ success: false, error: "Error interno" })
+    };
   }
-
-  return { 
-    statusCode: 400, 
-    body: JSON.stringify({ success: false, error: "Código inválido" }) 
-  };
 };
