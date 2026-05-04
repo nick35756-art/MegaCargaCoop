@@ -18,24 +18,155 @@
     }
   </style>
 </head>
-<body class="bg-zinc-950 text-white pb-20">   <!-- Extra padding so content doesn't hide behind banner -->
+<body class="bg-zinc-950 text-white pb-24">
 
-  <!-- HERO + all other sections stay exactly the same as last version -->
-  <!-- (I'm keeping this short — just add the banner at the very end) -->
+  <!-- HERO -->
+  <section class="hero-bg min-h-screen flex items-center pt-20">
+    <div class="max-w-7xl mx-auto px-6 grid md:grid-cols-2 gap-12 items-center">
+      <div>
+        <h1 class="text-5xl md:text-7xl font-bold leading-tight mb-6">
+          ¡La energía del futuro<br>la construimos juntos!
+        </h1>
+        <p class="text-2xl text-blue-300 mb-8">
+          La primera cooperativa colombiana de <span class="font-bold text-white">Megacargadores Tesla Semi</span>
+        </p>
 
-  <!-- ... [Your previous hero, ownership, table, 4 steps, form sections] ... -->
+        <!-- LIVE COUNTER -->
+        <div class="mb-10 bg-zinc-900/70 border border-blue-500/30 rounded-3xl p-8">
+          <p class="text-sm uppercase tracking-widest text-blue-400 mb-2">Movimiento actual</p>
+          <div id="counter" class="text-6xl md:text-7xl font-bold text-white mb-1">1.247</div>
+          <p class="text-xl text-green-400">cooperativistas • <span id="total" class="font-mono">$4.82B COP</span> comprometidos</p>
+        </div>
 
-  <!-- STICKY LEGAL BANNER (Colombia version) -->
+        <a href="#unete" class="inline-block bg-blue-600 hover:bg-blue-500 text-white text-2xl font-semibold px-12 py-6 rounded-3xl transition">
+          ¡Únete ahora!
+        </a>
+      </div>
+
+      <!-- ANIMATED LOGO -->
+      <div class="flex justify-center">
+        <video autoplay loop muted playsinline poster="grok_image_1777858398395.jpg" 
+               class="w-full max-w-lg drop-shadow-2xl rounded-3xl">
+          <source src="grok_video_2026-05-03-20-33-52.mp4" type="video/mp4">
+          <img src="grok_image_1777858398395.jpg" alt="MegaCarga Coop Logo" class="w-full max-w-lg rounded-3xl">
+        </video>
+      </div>
+    </div>
+  </section>
+
+  <!-- GOAL BANNER -->
+  <div class="bg-amber-600 py-6 text-center">
+    <p class="text-xl font-semibold">Necesitamos recaudar <span class="text-4xl font-bold">$8.000.000 USD</span></p>
+    <p class="text-amber-200">para construir Megacargadores Tesla Semi, paneles solares, baterías y estaciones en Colombia</p>
+  </div>
+
+  <!-- HOW OWNERSHIP WORKS -->
+  <section class="py-24 bg-black">
+    <div class="max-w-6xl mx-auto px-6">
+      <div class="text-center mb-12">
+        <span class="bg-yellow-500 text-black px-4 py-1 text-sm font-bold uppercase tracking-widest">CÓMO FUNCIONA LA PROPIEDAD</span>
+        <h2 class="text-6xl font-bold mt-6 leading-none">
+          UN VOTO.<br><span class="text-white">GANANCIAS COMPARTIDAS.</span>
+        </h2>
+      </div>
+
+      <!-- Pledge Table -->
+      <div class="overflow-x-auto mb-16">
+        <table class="w-full border-collapse bg-zinc-900 rounded-3xl overflow-hidden">
+          <thead>
+            <tr class="bg-yellow-500 text-black">
+              <th class="px-8 py-6 text-left font-bold">MONTO DE APORTE</th>
+              <th class="px-8 py-6 text-left font-bold">PESO DE VOTO</th>
+              <th class="px-8 py-6 text-left font-bold">PARTICIPACIÓN EN GANANCIAS</th>
+              <th class="px-8 py-6 text-left font-bold">ESTATUS</th>
+            </tr>
+          </thead>
+          <tbody class="text-white divide-y divide-zinc-800">
+            <tr><td class="px-8 py-6">$50.000 COP</td><td class="px-8 py-6">1 voto</td><td class="px-8 py-6">Base</td><td class="px-8 py-6">Cooperativista</td></tr>
+            <tr><td class="px-8 py-6">$500.000 COP</td><td class="px-8 py-6">1 voto</td><td class="px-8 py-6">~10x base</td><td class="px-8 py-6">Cooperativista</td></tr>
+            <tr><td class="px-8 py-6">$2.000.000 COP</td><td class="px-8 py-6">1 voto</td><td class="px-8 py-6">~40x base</td><td class="px-8 py-6">Cooperativista</td></tr>
+            <tr><td class="px-8 py-6">$10.000.000 COP+</td><td class="px-8 py-6">1 voto</td><td class="px-8 py-6">Proporcional</td><td class="px-8 py-6">⭐ Socio Fundador</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Two Columns -->
+      <div class="grid md:grid-cols-2 gap-8">
+        <div class="bg-zinc-900 p-10 rounded-3xl border border-yellow-500">
+          <h3 class="text-3xl font-bold mb-6">DERECHOS DE VOTO IGUALES</h3>
+          <p class="text-zinc-300">Cada cooperativista tiene <strong>exactamente 1 voto</strong>, sin importar cuánto aporte. Democracia real.</p>
+        </div>
+        <div class="bg-zinc-900 p-10 rounded-3xl border border-yellow-500">
+          <h3 class="text-3xl font-bold mb-6">PARTICIPACIÓN PROPORCIONAL EN GANANCIAS</h3>
+          <p class="text-zinc-300">Las utilidades se repartirán según el aporte de cada miembro (modelo propuesto).</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SIMPLE. DEMOCRATIC. 4 STEPS -->
+  <section class="py-24 bg-yellow-500 text-black">
+    <div class="max-w-7xl mx-auto px-6">
+      <h2 class="text-6xl font-black text-center mb-12">SIMPLE. DEMOCRÁTICO.</h2>
+      <div class="grid md:grid-cols-4 gap-8">
+        <div class="bg-white p-8 rounded-3xl">
+          <div class="text-6xl font-black text-yellow-500 mb-4">1</div>
+          <h4 class="font-bold text-2xl mb-4">HAZ TU APORTE</h4>
+          <p>Registra tu intención. No se cobra nada aún.</p>
+        </div>
+        <div class="bg-white p-8 rounded-3xl">
+          <div class="text-6xl font-black text-yellow-500 mb-4">2</div>
+          <h4 class="font-bold text-2xl mb-4">CONSTRUIMOS LA COALICIÓN</h4>
+          <p>Tus aportes se suman con miles de colombianos.</p>
+        </div>
+        <div class="bg-white p-8 rounded-3xl">
+          <div class="text-6xl font-black text-yellow-500 mb-4">3</div>
+          <h4 class="font-bold text-2xl mb-4">SE CONSTRUYE LA RED</h4>
+          <p>Con $8M USD instalamos Megacargadores, solares y baterías.</p>
+        </div>
+        <div class="bg-white p-8 rounded-3xl">
+          <div class="text-6xl font-black text-yellow-500 mb-4">4</div>
+          <h4 class="font-bold text-2xl mb-4">TÚ ERES DUEÑO</h4>
+          <p>1 voto = 1 voz. Ganancias compartidas proporcionalmente.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PLEDGE FORM -->
+  <section id="unete" class="py-24 bg-zinc-900">
+    <div class="max-w-2xl mx-auto px-6">
+      <h2 class="text-5xl font-bold text-center mb-10">Haz tu aporte</h2>
+      <form name="pledge" method="POST" data-netlify="true" class="space-y-8">
+        <input type="hidden" name="form-name" value="pledge">
+        <div>
+          <label class="block mb-2 text-zinc-300">Nombre completo</label>
+          <input type="text" name="name" required class="w-full bg-zinc-800 border border-zinc-700 rounded-2xl px-6 py-4 text-lg"/>
+        </div>
+        <div>
+          <label class="block mb-2 text-zinc-300">Correo electrónico</label>
+          <input type="email" name="email" required class="w-full bg-zinc-800 border border-zinc-700 rounded-2xl px-6 py-4 text-lg"/>
+        </div>
+        <div>
+          <label class="block mb-2 text-zinc-300">Monto de aporte (COP)</label>
+          <input type="number" name="amount" min="50000" placeholder="500000" required class="w-full bg-zinc-800 border border-zinc-700 rounded-2xl px-6 py-4 text-3xl"/>
+        </div>
+        <button type="submit" class="w-full bg-green-600 hover:bg-green-500 py-8 text-3xl font-bold rounded-3xl transition">
+          Confirmar mi aporte
+        </button>
+      </form>
+      <p class="text-center text-sm text-zinc-500 mt-8">Recibirás un código de verificación por email.<br>Este es un compromiso de intención.</p>
+    </div>
+  </section>
+
+  <!-- STICKY LEGAL BANNER -->
   <div class="sticky-legal bg-black border-t border-red-600 py-3 text-center text-xs md:text-sm text-zinc-400">
     <div class="max-w-7xl mx-auto px-6">
       <strong class="text-red-400">AVISO LEGAL:</strong> 
-      Este es solo un compromiso de intención no vinculante. 
-      No se está recaudando dinero todavía. 
+      Este es solo un compromiso de intención no vinculante. No se está recaudando dinero todavía. 
       Todos los conceptos de reparto de ganancias, derechos de voto y propiedad son 
-      <strong class="text-amber-400">propuestos únicamente</strong> y están sujetos a revisión 
-      y aprobación legal bajo la <strong>Ley 454 de 1998</strong> (Cooperativas) y normatividad de Supersolidaria. 
-      Este sitio <strong>NO</strong> constituye una oferta pública de valores ni una invitación a invertir regulada 
-      por la Superintendencia Financiera de Colombia.
+      <strong class="text-amber-400">propuestos únicamente</strong> — sujetos a revisión legal bajo la Ley 454 de 1998 y Supersolidaria. 
+      Este sitio <strong>NO</strong> constituye una oferta pública de valores.
     </div>
   </div>
 
