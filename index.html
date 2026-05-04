@@ -4,9 +4,15 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>MegaCarga Coop - Primera Cooperativa de Megacargadores Tesla Semi en Colombia</title>
+  
+  <!-- Tailwind CDN (you were using it) -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  
   <style>
-    /* Existing styles... (keep all your original styles here) */
-
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
+    
+    body { font-family: 'Inter', system-ui, sans-serif; }
+    
     /* SECOND SCROLLING BANNER - RIGHT TO LEFT (Slower) */
     .banner-reverse {
       background: linear-gradient(90deg, #000, #1a1a1a);
@@ -22,36 +28,46 @@
       border-bottom: 3px solid #ffd700;
       box-shadow: 0 4px 15px rgba(255, 215, 0, 0.3);
     }
-
     .banner-reverse span {
       display: inline-block;
       padding-left: 100%;
       animation: scrollRightToLeft 48s linear infinite;
     }
-
     @keyframes scrollRightToLeft {
-      0%   { transform: translateX(0); }
+      0% { transform: translateX(0); }
       100% { transform: translateX(-100%); }
     }
-
     .banner-reverse:hover span {
       animation-play-state: paused;
     }
-
     @media (max-width: 768px) {
       .banner-reverse { font-size: 0.95rem; padding: 12px 0; }
       .banner-reverse span { animation-duration: 38s; }
     }
   </style>
 </head>
-<body>
+<body class="bg-black text-white">
 
-  <!-- Your existing top banner and content -->
+  <!-- TOP BANNER -->
+  <div class="banner bg-yellow-400 text-black py-3 text-center font-bold overflow-hidden whitespace-nowrap">
+    <span>HELP BUILD THE FUTURE • MÍNIMO $1.000.000 COP TE DA ENTRADA • UN VOTO POR MIEMBRO • GANANCIAS COMPARTIDAS POR TODOS • </span>
+  </div>
 
-  <!-- SIMPLE. DEMOCRÁTICO. Section -->
-  <!-- ... your steps ... -->
+  <!-- HERO / PRE-LANZAMIENTO -->
+  <div class="max-w-7xl mx-auto px-6 py-12 text-center">
+    <h1 class="text-6xl font-bold mb-4">● PRE-LANZAMIENTO</h1>
+    <div class="text-5xl font-bold text-yellow-400 mb-8">$28.450.000.000 COP</div>
+    <p class="text-2xl">COMPROMETIDOS TOTALES</p>
+    <!-- Add your other counters here if needed -->
+  </div>
 
-  <!-- SECOND SCROLLING BANNER -->
+  <!-- SIMPLE. DEMOCRÁTICO. -->
+  <div class="max-w-7xl mx-auto px-6 py-12">
+    <h2 class="text-6xl font-bold text-center mb-12">SIMPLE. DEMOCRÁTICO.</h2>
+    <!-- Your 4 steps go here - add them back if missing -->
+  </div>
+
+  <!-- SECOND BANNER (Right to Left) -->
   <div class="banner-reverse">
     <span>
       HELP BUILD THE FUTURE • MÍNIMO $1.000.000 COP TE DA ENTRADA • UN VOTO POR MIEMBRO • GANANCIAS COMPARTIDAS POR TODOS • 
@@ -60,31 +76,39 @@
     </span>
   </div>
 
-  <!-- HAZ TU APORTE FORM -->
-  <section class="form-section">
-    <h2>Haz tu aporte</h2>
-
+  <!-- HAZ TU APORTE -->
+  <section class="max-w-4xl mx-auto px-6 py-12">
+    <h2 class="text-4xl font-bold text-center mb-8">Haz tu aporte</h2>
+    
     <!-- SEND FORM -->
-    <div id="send-form">
-      <input type="text" id="name" placeholder="Nombre completo" required>
-      <input type="email" id="email" placeholder="Correo electrónico" required>
-      <input type="number" id="amount" placeholder="Monto de aporte (COP)" required>
-      <button onclick="sendVerificationCode()">Confirmar mi aporte</button>
+    <div id="send-form" class="grid md:grid-cols-4 gap-4 max-w-2xl mx-auto">
+      <input type="text" id="name" placeholder="Nombre completo" class="bg-zinc-900 border border-zinc-700 rounded-lg px-4 py-3">
+      <input type="email" id="email" placeholder="Correo electrónico" class="bg-zinc-900 border border-zinc-700 rounded-lg px-4 py-3">
+      <input type="number" id="amount" placeholder="Monto de aporte (COP)" class="bg-zinc-900 border border-zinc-700 rounded-lg px-4 py-3">
+      <button onclick="sendVerificationCode()" 
+              class="bg-blue-600 hover:bg-blue-700 font-semibold py-3 rounded-lg">
+        Confirmar mi aporte
+      </button>
     </div>
 
-    <!-- VERIFY SECTION (hidden initially) -->
-    <div id="verify-section" style="display: none;">
-      <p>Hemos enviado un código de 6 dígitos a <strong id="display-email"></strong></p>
-      <input type="text" id="code-input" maxlength="6" placeholder="Código de 6 dígitos" style="font-size: 1.5rem; text-align: center;">
-      <button onclick="verifyCode()">Verificar Código</button>
-      <button onclick="resendCode()">Reenviar código</button>
+    <!-- VERIFY SECTION -->
+    <div id="verify-section" style="display: none;" class="max-w-md mx-auto mt-8 text-center">
+      <p class="mb-4">Hemos enviado un código de 6 dígitos a <strong id="display-email"></strong></p>
+      <input type="text" id="code-input" maxlength="6" placeholder="000000" 
+             class="bg-zinc-900 border border-yellow-400 text-4xl text-center tracking-widest w-full py-6 rounded-xl mb-4">
+      <button onclick="verifyCode()" class="w-full bg-green-600 hover:bg-green-700 py-4 rounded-xl font-bold text-lg">
+        Verificar Código
+      </button>
+      <button onclick="resendCode()" class="text-yellow-400 mt-4 underline">Reenviar código</button>
     </div>
   </section>
 
-  <!-- Footer etc. -->
+  <!-- Footer -->
+  <footer class="text-center py-8 text-zinc-500">
+    © 2026 MegaCarga Coop • Todos los derechos reservados
+  </footer>
 
   <script>
-    // ====================== VERIFICATION SYSTEM ======================
     let currentTempToken = null;
     let currentEmail = null;
 
@@ -123,7 +147,6 @@
 
     async function verifyCode() {
       const code = document.getElementById('code-input').value.trim();
-
       if (code.length !== 6) {
         alert("Ingresa el código de 6 dígitos");
         return;
@@ -143,8 +166,7 @@
         const result = await response.json();
 
         if (result.success) {
-          alert("✅ ¡Correo verificado correctamente!");
-          // You can add more success logic here (save pledge, etc.)
+          alert("✅ ¡Correo verificado correctamente! Puedes continuar.");
         } else {
           alert("❌ " + (result.error || "Código inválido"));
           document.getElementById('code-input').value = '';
@@ -159,11 +181,9 @@
       await sendVerificationCode();
     }
 
-    // Make functions global
     window.sendVerificationCode = sendVerificationCode;
     window.verifyCode = verifyCode;
     window.resendCode = resendCode;
   </script>
-
 </body>
 </html>
