@@ -1,45 +1,38 @@
 // netlify/functions/verify-code.js
-// Simple in-memory store (no blobs)
-const verificationStore = new Map();
+const crypto = require('crypto');
 
 exports.handler = async function(event) {
   try {
-    const { email, code } = JSON.parse(event.body || '{}');
+    const { email, code, tempToken } = JSON.parse(event.body || '{}');
 
-    if (!email || !code) {
-      return {
-        statusCode: 400,
-        body: JSON.stringify({ success: false, error: "Datos incompletos" })
-      };
+    if (!email || !code || !tempToken) {
+      return { statusCode: 400, body: JSON.stringify({ success: false, error: "Datos incompletos" }) };
     }
 
-    const stored = verificationStore.get(email);
-
-    if (!stored) {
-      return {
-        statusCode: 400,
-        body: JSON.stringify({ success: false, error: "Código expirado o no encontrado" })
-      };
+    // Verify token
+    const [signature, payload] = tempToken.split('.');
+    if (!signature || !payload) {
+      return { statusCode: 400, body: JSON.stringify({ success: false, error: "Token inválido" }) };
     }
 
-    if (stored.code === code && Date.now() < stored.expires) {
-      verificationStore.delete(email); // one-time use
+    const decoded = Buffer.from(payload, 'base64').toString();
+    const [storedCode, expiresStr, storedEmail] = decoded.split('|');
 
-      return {
-        statusCode: 200,
-        body: JSON.stringify({ success: true })
-      };
+    const hmac = crypto.createHmac('sha256', process.env.NETLIFY_SECRET || 'fallback-secret-change-in-production');
+    const expectedSig = hmac.update(decoded).digest('hex');
+
+    if (expectedSig !== signature || storedEmail !== email || Date.now() > parseInt(expiresStr)) {
+      return { statusCode: 400, body: JSON.stringify({ success: false, error: "Código inválido o expirado" }) };
+    }
+
+    if (storedCode === code) {
+      console.log(`✅ Code verified successfully for ${email}`);
+      return { statusCode: 200, body: JSON.stringify({ success: true }) };
     } else {
-      return {
-        statusCode: 400,
-        body: JSON.stringify({ success: false, error: "Código inválido o expirado" })
-      };
+      return { statusCode: 400, body: JSON.stringify({ success: false, error: "Código inválido" }) };
     }
   } catch (err) {
     console.error("❌ Verify Error:", err);
-    return {
-      statusCode: 500,
-      body: JSON.stringify({ success: false, error: "Error interno" })
-    };
+    return { statusCode: 500, body: JSON.stringify({ success: false, error: "Error interno" }) };
   }
 };
