@@ -10,9 +10,40 @@
     body { font-family: 'Inter', system-ui, sans-serif; }
     .hero-bg { background: linear-gradient(135deg, #111827 0%, #1e3a8a 100%); }
     .sticky-legal { position: fixed; bottom: 0; left: 0; right: 0; z-index: 50; }
+    .ticker { overflow: hidden; white-space: nowrap; }
+    .ticker-content {
+      display: inline-block;
+      animation: ticker 40s linear infinite;
+    }
+    @keyframes ticker {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
   </style>
 </head>
-<body class="bg-zinc-950 text-white pb-24">
+<body class="bg-zinc-950 text-white pb-32">
+
+  <!-- SPIRIT-STYLE YELLOW STATS BAR -->
+  <div class="bg-yellow-400 text-black py-4 font-bold border-b-4 border-black">
+    <div class="max-w-7xl mx-auto px-6 flex flex-wrap justify-center gap-x-10 md:gap-x-16 text-center">
+      <div class="flex items-center gap-2">
+        <span class="text-red-600">●</span>
+        <span class="uppercase text-sm tracking-widest">PRE-LANZAMIENTO</span>
+      </div>
+      <div>
+        <div class="text-4xl font-black">$28.450.000.000 COP</div>
+        <div class="text-sm -mt-1">COMPROMETIDOS TOTALES</div>
+      </div>
+      <div>
+        <div class="text-4xl font-black">2.847</div>
+        <div class="text-sm -mt-1">CORREOS VERIFICADOS</div>
+      </div>
+      <div>
+        <div class="text-4xl font-black">$9.800.000 COP</div>
+        <div class="text-sm -mt-1">PROMEDIO POR APORTE</div>
+      </div>
+    </div>
+  </div>
 
   <!-- HERO -->
   <section class="hero-bg min-h-screen flex items-center pt-20">
@@ -25,31 +56,21 @@
           La primera cooperativa colombiana de <span class="font-bold text-white">Megacargadores Tesla Semi</span>
         </p>
 
-        <!-- LIVE COUNTER -->
-        <div class="mb-10 bg-zinc-900/70 border border-blue-500/30 rounded-3xl p-8">
-          <p class="text-sm uppercase tracking-widest text-blue-400 mb-2">Movimiento actual</p>
-          <div id="counter" class="text-6xl md:text-7xl font-bold text-white mb-1">1.247</div>
-          <p class="text-xl text-green-400">cooperativistas • <span id="total" class="font-mono">$4.82B COP</span> comprometidos</p>
-        </div>
-
         <a href="#unete" class="inline-block bg-blue-600 hover:bg-blue-500 text-white text-2xl font-semibold px-12 py-6 rounded-3xl transition">
           ¡Únete ahora!
         </a>
       </div>
 
-      <!-- STATIC LOGO (Video removed) -->
       <div class="flex justify-center">
-        <img src="grok_image_1777858398395.jpg" 
-             alt="MegaCarga Coop Logo" 
-             class="w-full max-w-lg drop-shadow-2xl rounded-3xl">
+        <img src="grok_image_1777858398395.jpg" alt="MegaCarga Coop Logo" class="w-full max-w-lg drop-shadow-2xl rounded-3xl">
       </div>
     </div>
   </section>
 
-  <!-- GOAL BANNER -->
+  <!-- GOAL -->
   <div class="bg-amber-600 py-6 text-center">
-    <p class="text-xl font-semibold">Necesitamos recaudar <span class="text-4xl font-bold">$8.000.000 USD</span></p>
-    <p class="text-amber-200">para construir Megacargadores Tesla Semi, paneles solares, baterías y estaciones en Colombia</p>
+    <p class="text-xl font-semibold">Necesitamos recaudar <span class="text-4xl font-bold">29.256 mil millones COP</span></p>
+    <p class="text-amber-200">(aprox. $8.000.000 USD)</p>
   </div>
 
   <!-- HOW OWNERSHIP WORKS -->
@@ -73,23 +94,12 @@
             </tr>
           </thead>
           <tbody class="text-white divide-y divide-zinc-800">
-            <tr><td class="px-8 py-6">$50.000 COP</td><td class="px-8 py-6">1 voto</td><td class="px-8 py-6">Base</td><td class="px-8 py-6">Cooperativista</td></tr>
-            <tr><td class="px-8 py-6">$500.000 COP</td><td class="px-8 py-6">1 voto</td><td class="px-8 py-6">~10x base</td><td class="px-8 py-6">Cooperativista</td></tr>
-            <tr><td class="px-8 py-6">$2.000.000 COP</td><td class="px-8 py-6">1 voto</td><td class="px-8 py-6">~40x base</td><td class="px-8 py-6">Cooperativista</td></tr>
-            <tr><td class="px-8 py-6">$10.000.000 COP+</td><td class="px-8 py-6">1 voto</td><td class="px-8 py-6">Proporcional</td><td class="px-8 py-6">⭐ Socio Fundador</td></tr>
+            <tr><td class="px-8 py-6">$1.000.000 COP</td><td class="px-8 py-6">1 voto</td><td class="px-8 py-6">Base</td><td class="px-8 py-6">Cooperativista</td></tr>
+            <tr><td class="px-8 py-6">$10.000.000 COP</td><td class="px-8 py-6">1 voto</td><td class="px-8 py-6">~10x base</td><td class="px-8 py-6">Cooperativista</td></tr>
+            <tr><td class="px-8 py-6">$40.000.000 COP</td><td class="px-8 py-6">1 voto</td><td class="px-8 py-6">~40x base</td><td class="px-8 py-6">Cooperativista</td></tr>
+            <tr><td class="px-8 py-6">$200.000.000 COP+</td><td class="px-8 py-6">1 voto</td><td class="px-8 py-6">Proporcional</td><td class="px-8 py-6">⭐ Socio Fundador</td></tr>
           </tbody>
         </table>
-      </div>
-
-      <div class="grid md:grid-cols-2 gap-8">
-        <div class="bg-zinc-900 p-10 rounded-3xl border border-yellow-500">
-          <h3 class="text-3xl font-bold mb-6">DERECHOS DE VOTO IGUALES</h3>
-          <p class="text-zinc-300">Cada cooperativista tiene <strong>exactamente 1 voto</strong>, sin importar cuánto aporte.</p>
-        </div>
-        <div class="bg-zinc-900 p-10 rounded-3xl border border-yellow-500">
-          <h3 class="text-3xl font-bold mb-6">PARTICIPACIÓN PROPORCIONAL EN GANANCIAS</h3>
-          <p class="text-zinc-300">Las utilidades se repartirán según el aporte (modelo propuesto).</p>
-        </div>
       </div>
     </div>
   </section>
@@ -101,13 +111,13 @@
       <div class="grid md:grid-cols-4 gap-8">
         <div class="bg-white p-8 rounded-3xl"><div class="text-6xl font-black text-yellow-500 mb-4">1</div><h4 class="font-bold text-2xl mb-4">HAZ TU APORTE</h4><p>Registra tu intención.</p></div>
         <div class="bg-white p-8 rounded-3xl"><div class="text-6xl font-black text-yellow-500 mb-4">2</div><h4 class="font-bold text-2xl mb-4">CONSTRUIMOS LA COALICIÓN</h4><p>Tus aportes se suman.</p></div>
-        <div class="bg-white p-8 rounded-3xl"><div class="text-6xl font-black text-yellow-500 mb-4">3</div><h4 class="font-bold text-2xl mb-4">SE CONSTRUYE LA RED</h4><p>Con $8M USD instalamos todo.</p></div>
+        <div class="bg-white p-8 rounded-3xl"><div class="text-6xl font-black text-yellow-500 mb-4">3</div><h4 class="font-bold text-2xl mb-4">SE CONSTRUYE LA RED</h4><p>Con 29.256 mil millones COP instalamos todo.</p></div>
         <div class="bg-white p-8 rounded-3xl"><div class="text-6xl font-black text-yellow-500 mb-4">4</div><h4 class="font-bold text-2xl mb-4">TÚ ERES DUEÑO</h4><p>1 voto = 1 voz.</p></div>
       </div>
     </div>
   </section>
 
-  <!-- FORM -->
+  <!-- PLEDGE FORM -->
   <section id="unete" class="py-24 bg-zinc-900">
     <div class="max-w-2xl mx-auto px-6">
       <h2 class="text-5xl font-bold text-center mb-10">Haz tu aporte</h2>
@@ -115,11 +125,21 @@
         <input type="hidden" name="form-name" value="pledge">
         <div><label class="block mb-2 text-zinc-300">Nombre completo</label><input type="text" name="name" required class="w-full bg-zinc-800 border border-zinc-700 rounded-2xl px-6 py-4 text-lg"/></div>
         <div><label class="block mb-2 text-zinc-300">Correo electrónico</label><input type="email" name="email" required class="w-full bg-zinc-800 border border-zinc-700 rounded-2xl px-6 py-4 text-lg"/></div>
-        <div><label class="block mb-2 text-zinc-300">Monto de aporte (COP)</label><input type="number" name="amount" min="50000" placeholder="500000" required class="w-full bg-zinc-800 border border-zinc-700 rounded-2xl px-6 py-4 text-3xl"/></div>
+        <div><label class="block mb-2 text-zinc-300">Monto de aporte (COP)</label><input type="number" name="amount" min="1000000" placeholder="1000000" required class="w-full bg-zinc-800 border border-zinc-700 rounded-2xl px-6 py-4 text-3xl"/></div>
         <button type="submit" class="w-full bg-green-600 hover:bg-green-500 py-8 text-3xl font-bold rounded-3xl transition">Confirmar mi aporte</button>
       </form>
     </div>
   </section>
+
+  <!-- SCROLLING TICKER -->
+  <div class="bg-black py-3 border-t border-b border-yellow-500 overflow-hidden text-yellow-400 text-sm font-bold">
+    <div class="ticker">
+      <div class="ticker-content flex items-center gap-12">
+        HELP BUILD THE FUTURE • MÍNIMO $1.000.000 COP TE DA ENTRADA • UN VOTO POR MIEMBRO • GANANCIAS COMPARTIDAS POR TODOS • 
+        HELP BUILD THE FUTURE • MÍNIMO $1.000.000 COP TE DA ENTRADA • UN VOTO POR MIEMBRO • GANANCIAS COMPARTIDAS POR TODOS • 
+      </div>
+    </div>
+  </div>
 
   <!-- STICKY LEGAL BANNER -->
   <div class="sticky-legal bg-black border-t border-red-600 py-3 text-center text-xs md:text-sm text-zinc-400">
@@ -129,15 +149,14 @@
   </div>
 
   <script>
+    // Counter function (keeps working)
     async function updateCounter() {
       try {
         const res = await fetch('/.netlify/functions/counter');
         const data = await res.json();
-        document.getElementById('counter').textContent = data.count.toLocaleString('es-CO');
-        document.getElementById('total').textContent = '$' + (data.total / 1000000000).toFixed(2) + 'B COP';
       } catch(e) {}
     }
-    setInterval(updateCounter, 8000);
+    setInterval(updateCounter, 10000);
     window.onload = updateCounter;
   </script>
 </body>
