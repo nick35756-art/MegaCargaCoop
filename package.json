@@ -2,6 +2,7 @@
   "name": "megacargacoop",
   "version": "1.0.0",
   "dependencies": {
-    "resend": "^4.0.0"
+    "resend": "^4.0.0",
+    "@netlify/blobs": "^8.0.0"
   }
 }
