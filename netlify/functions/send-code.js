@@ -10,7 +10,6 @@ exports.handler = async function(event) {
     const code = Math.floor(100000 + Math.random() * 900000).toString();
     const expires = Date.now() + 15 * 60 * 1000; // 15 minutes
 
-    // Store the code
     const store = getStore("verification-codes");
     await store.set(email, JSON.stringify({ code, expires }));
 
