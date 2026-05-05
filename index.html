@@ -217,7 +217,7 @@
   </footer>
 
  <script>
-// ====================== FINAL WORKING VERIFICATION ======================
+// ====================== FINAL SCRIPT ======================
 let currentTempToken = null;
 let currentEmail = null;
 
@@ -243,17 +243,12 @@ async function sendVerificationCode() {
 
     if (data.success) {
       currentTempToken = data.tempToken;
-      
-      // Open verification modal
       document.getElementById('sent-email').textContent = email;
       document.getElementById('verify-modal').classList.remove('hidden');
       document.getElementById('code-input').focus();
-    } else {
-      alert("Error: " + (data.error || "Inténtalo de nuevo"));
     }
-  } catch (err) {
-    console.error(err);
-    alert("Error de conexión. Inténtalo de nuevo.");
+  } catch (e) {
+    alert("Error de conexión");
   }
 }
 
@@ -265,11 +260,6 @@ async function verifyCode() {
     return;
   }
 
-  if (!currentTempToken) {
-    alert("Primero confirma tu aporte");
-    return;
-  }
-
   try {
     const response = await fetch('/.netlify/functions/verify-code', {
       method: 'POST',
@@ -277,7 +267,9 @@ async function verifyCode() {
       body: JSON.stringify({
         email: currentEmail,
         code: code,
-        tempToken: currentTempToken
+        tempToken: currentTempToken,
+        name: document.getElementById('name').value.trim(),
+        amount: document.getElementById('amount').value
       })
     });
 
@@ -291,17 +283,15 @@ async function verifyCode() {
       document.getElementById('code-input').value = '';
     }
   } catch (err) {
-    alert("Error verificando el código.");
+    alert("Error verificando código");
   }
 }
 
 function resendCode() {
-  if (!currentEmail) return;
   document.getElementById('code-input').value = '';
   sendVerificationCode();
 }
 
-// Make button work
 window.sendVerificationCode = sendVerificationCode;
 window.verifyCode = verifyCode;
 window.resendCode = resendCode;
