@@ -26,7 +26,7 @@ exports.handler = async function(event) {
     // === SUCCESS - Send email to YOU ===
     await resend.emails.send({
       from: 'MegaCarga Coop <pledges@mail.megacargacoop.com>',
-      to: 'YOUR_EMAIL@gmail.com',           // ← CHANGE THIS TO YOUR REAL EMAIL
+      to: 'jsjs46787@gmail.com',           // ← CHANGE THIS TO YOUR REAL EMAIL
       subject: `Nuevo Aporte: ${name} - ${amount} COP`,
       html: `
         <h2>✅ Nuevo Aporte Recibido</h2>
